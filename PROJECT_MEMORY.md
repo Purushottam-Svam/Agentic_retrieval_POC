@@ -1,6 +1,7 @@
 # Agentic Retrieval POC — Project Memory
 
-> Read this file to fully understand the project without touching any other file.
+> Read this file to fully understand the project without reading any other file.
+> Updated whenever the architecture or design decisions change.
 
 ---
 
@@ -8,146 +9,238 @@
 
 This project answers one question:
 
-**"Is normal AI search good enough for complex questions — or do we need something smarter?"**
+**"Is a single-shot RAG system good enough for complex enterprise questions — or do we need agentic retrieval?"**
 
-We built two systems, ran the same questions through both, and compared the results side by side.
+We built two systems on the same knowledge base, ran the same questions through both, and compared the synthesized answers side by side.
 
-- **System 1 — Semantic Search (the normal way):** Ask a question, find the most similar text in the database, return it. Done. No thinking involved.
-- **System 2 — Agentic Retrieval (the smarter way):** Ask a question, let an AI (Claude) *reason* about what it needs to find, search multiple times, use tools, connect the dots, then write a proper answer.
+- **System 1 — Semantic RAG (single-shot):** One fixed vector search -> chunks stuffed into a prompt -> one GPT-4o call -> answer. Fast. Limited to whatever that one search returned.
+- **System 2 — Agentic Retrieval (multi-step loop):** GPT-4o in a loop. Decides what to search, searches multiple times, uses tools, reflects on what it found, synthesizes a complete answer.
+
+---
+
+## Why the Comparison Is Fair
+
+Both systems use:
+- The **same model**: GPT-4o
+- The **same ChromaDB index**: all 16 TechNova documents
+- The **same utility tools**: `calculate` (math) and `get_today_info` (date lookup)
+
+The **ONLY difference**:
+
+| | Semantic RAG | Agentic |
+|---|---|---|
+| `search_knowledge_base` | Called ONCE before LLM runs (fixed) | LLM calls it as many times as needed |
+| `calculate` | YES — in the same GPT-4o call | YES |
+| `get_today_info` | YES — in the same GPT-4o call | YES |
+
+Giving `search_knowledge_base` to Semantic RAG in a loop would make it Agentic by definition. That tool IS what defines the agentic approach.
 
 ---
 
 ## The Fake Company We Built It On
 
-To make it realistic, we created a fake company called **TechNova Inc.** and gave it 16 internal documents:
+Fictional company: **TechNova Inc.** with 16 internal documents across 6 categories:
 
-| Document Type | Examples |
-|---|---|
-| Incident Reports | "Payment Gateway caused a latency spike in Nov 2024" |
-| Architecture Docs | "Auth service owned by David Park, RTO = 10 minutes" |
-| Policies | "Deployments on Fridays after 3pm UTC are blocked" |
-| Team Directory | "Sarah Chen — Payments Lead — sarah.chen@technova.io" |
-| Runbooks | "If Redis fails, enable AUTH_FALLBACK_MODE=true" |
-| FAQs | "Deployment freeze: Nov 24 – Dec 2 for Black Friday" |
+| Category | Doc IDs | Contents |
+|---|---|---|
+| incident | INC-001, INC-002, INC-003 | Post-mortems with root causes and owners |
+| architecture | ARCH-001, ARCH-002, ARCH-003, ARCH-004 | Service specs: owner, RTO, dependencies |
+| policy | POL-001, POL-002, POL-003 | Deployment, DB migration, on-call policies |
+| team | TEAM-001 | Full engineering directory with names and emails |
+| runbook | RUN-001, RUN-002 | Step-by-step operational runbooks |
+| faq | FAQ-001, FAQ-002, FAQ-003 | Common engineering FAQs |
 
-These 16 documents are the "knowledge base" — like a company's internal wiki.
+Documents are plain Python strings in `data/corpus.py`. ChromaDB stores their vector embeddings in `chroma_db/` (auto-created, gitignored).
 
 ---
 
-## The 4 Questions We Asked Both Systems
+## The 4 Test Queries
 
 ### Q1 — Simple
 > "What is the database migration policy?"
 
-The answer is in ONE document. Both systems find it easily. No difference.
+Answer is in ONE document (POL-002). One search finds it. Both systems equivalent.
+**Expected gap:** none.
 
 ---
 
-### Q2 — Multi-hop (requires connecting 2+ documents)
+### Q2 — Multi-hop (chain across 3 documents)
 > "Who is responsible for the service that caused the November 2024 latency incident?"
 
-To answer this correctly you need to:
-1. Read the incident report → "Payment Gateway caused it"
-2. Read the Payment Gateway architecture doc → "owned by Sarah Chen"
-3. Read the team directory → "sarah.chen@technova.io"
+Requires chaining:
+1. INC-001 → "Payment Gateway caused it"
+2. ARCH-001 → "Payment Gateway is owned by Sarah Chen"
+3. TEAM-001 → "sarah.chen@technova.io"
 
-**Semantic search:** Returns the incident report chunk. Stops. Doesn't connect to Sarah Chen.
-
-**Agentic retrieval:** Searches for the incident → finds Payment Gateway → searches for its owner → finds Sarah Chen → returns her name + email + root cause. Complete answer.
-
----
-
-### Q3 — Aggregation (requires math across documents)
-> "What is the combined recovery time if both Auth AND Payment Gateway fail simultaneously?"
-
-Auth RTO = 10 minutes (in one doc). Payment RTO = 15 minutes (in another doc).
-Answer = 10 + 15 = **25 minutes**.
-
-**Semantic search:** Returns both documents. The user has to manually read, find the numbers, and add them.
-
-**Agentic retrieval:** Retrieves both docs, extracts the numbers, calls a calculator tool, returns "25 minutes."
+**Semantic RAG:** Does one search. If TEAM-001 was not in the top-4 results, the email is unavailable — no tool can fix a document that was never retrieved.
+**Agentic:** Follows the chain document by document until it has name + email + root cause.
+**Expected gap:** CLEAREST gap. Both have same utility tools. Difference is pure retrieval.
 
 ---
 
-### Q4 — Conditional + Date-aware
-> "We want to deploy to Checkout this Friday afternoon. What approvals do we need?"
+### Q3 — Aggregation (math across 2 documents)
+> "Combined recovery time if both Auth AND Payment Gateway fail simultaneously?"
 
-To answer: read deployment policy + check what day of week Friday is + check the Friday cutoff (3pm UTC) + look up who the approvers are.
+- ARCH-002 → Auth RTO = 10 minutes
+- ARCH-001 → Payment Gateway RTO = 15 minutes
+- 10 + 15 = **25 minutes**
 
-**Semantic search:** Returns the deployment policy doc. Doesn't know it's Friday. Doesn't flag the time cutoff. Doesn't pull the contact names.
-
-**Agentic retrieval:** Checks today's date, reads the policy, identifies the Friday 15:00 UTC blocker, looks up Alex Rivera + Marcus Webb + James Liu, tells you the deployment is likely blocked and who to call.
-
----
-
-## The Score
-
-| Query | Semantic | Agentic |
-|---|---|---|
-| Q1 — Simple | 7/10 | 8/10 |
-| Q2 — Multi-hop | 3/10 | 9/10 |
-| Q3 — Aggregation | 2/10 | 9/10 |
-| Q4 — Conditional | 3/10 | 9/10 |
-| **Total** | **15/40** | **35/40** |
+**Semantic RAG:** Has `calculate` tool now. If both docs were retrieved (likely — both match the query), it can give the correct answer.
+**Agentic:** Explicitly searches for each service, always cites both source documents.
+**Expected gap:** NARROWS with fair tool access. Gap is now about reliability and traceability, not the math itself.
 
 ---
 
-## What Each File Does
+### Q4 — Conditional + date-aware
+> "Deploy to Checkout this Friday afternoon. What approvals do we need?"
+
+Requires: POL-001 (Friday freeze rule) + `get_today_info()` (is it actually Friday?) + TEAM-001 (approver contacts).
+
+**Semantic RAG:** Has `get_today_info` now — can resolve the date condition. Gap remains if TEAM-001 was not retrieved (cannot name approvers).
+**Agentic:** Searches policy, checks date, then separately searches for the team.
+**Expected gap:** PARTIALLY NARROWS. Date condition closes. Approver contact may still be missing.
+
+---
+
+## Architecture
 
 ```
-run_poc.py                   ← Start here. Runs all 3 demos.
-01_semantic_retrieval.py     ← Demo 1: shows normal vector search results
-02_agentic_retrieval.py      ← Demo 2: shows Claude reasoning + tool calls live
-03_comparison_demo.py        ← Demo 3: runs both on same queries, shows scorecard
-
-data/corpus.py               ← The 16 TechNova documents (the "knowledge base")
-shared/kb.py                 ← Sets up ChromaDB + local AI embeddings
-shared/display.py            ← Terminal display helpers (colors, tables, panels)
-
-chroma_db/                   ← Auto-created folder where vectors are stored
-.env.example                 ← Copy this to .env and add your API key
+User Query
+    |
+    +── SEMANTIC RAG PATH ──────────────────────────────────────────────────────
+    |     1. ONE vector search -> top-4 chunks from ChromaDB
+    |     2. Chunks stuffed into prompt as context
+    |     3. GPT-4o call with tools: [calculate, get_today_info]
+    |        -> may call calculate or get_today_info if needed
+    |        -> CANNOT call search_knowledge_base (not in its tools)
+    |     4. Returns synthesized answer
+    |
+    +── AGENTIC RETRIEVAL PATH ─────────────────────────────────────────────────
+          GPT-4o reasoning loop
+            |
+            +-- search_knowledge_base(query)    <- hits the same ChromaDB index
+            +-- calculate(expression)           <- Python eval (safe char whitelist)
+            +-- get_today_info()                <- UTC date + day of week
+            |
+            reflect: "do I have enough? what do I still need?"
+            |
+            synthesize: complete answer with [DOC-ID] citations
 ```
 
 ---
 
-## How to Run It
+## File Structure
 
-### Step 1 — Set your API key
 ```
-Copy .env.example → rename to .env
-Open .env → add your Anthropic API key:  ANTHROPIC_API_KEY=sk-ant-...
+Agentic_retrieval_Poc_1/
+│
+├── .env                       # GITIGNORED -- your real OpenAI API key lives here
+├── .env.example               # Placeholder template -- safe to commit
+├── .gitignore                 # Excludes: .env, .venv, chroma_db, __pycache__, .claude
+├── requirements.txt           # Pinned dependencies
+│
+├── run_poc.py                 # Master entry point (argparse: --semantic/--agentic/--compare)
+├── run_interactive.py         # Interactive: type your question, both systems answer
+│
+├── 01_semantic_retrieval.py   # Shows raw vector search results (no synthesis)
+├── 02_agentic_retrieval.py    # Core agentic loop: TOOLS, SYSTEM_PROMPT, run_agentic_query()
+├── 03_comparison_demo.py      # Side-by-side: Semantic RAG vs Agentic on all 4 queries
+│
+├── data/
+│   ├── __init__.py
+│   └── corpus.py              # 16 TechNova documents as plain Python strings
+│
+└── shared/
+    ├── __init__.py
+    ├── kb.py                  # ChromaDB setup + semantic_search() used by all scripts
+    └── display.py             # Rich terminal helpers: print_tool_call, print_final_answer, etc.
 ```
 
-### Step 2 — Run semantic search (no API key needed)
+---
+
+## Key Design Decisions
+
+### Tool access (current, fair design)
+- Semantic RAG tools: `calculate`, `get_today_info` (NO `search_knowledge_base`)
+- Agentic tools: all three — `search_knowledge_base`, `calculate`, `get_today_info`
+- Rationale: utility tools (math, date) are not retrieval. Giving `search_knowledge_base` in a loop to Semantic RAG = making it Agentic.
+
+### Module importing (numeric filenames)
+Python cannot `import 02_agentic_retrieval` directly. Use:
+```python
+import importlib
+_ag = importlib.import_module("02_agentic_retrieval")
+run_agentic_query = _ag.run_agentic_query
+execute_tool = _ag.execute_tool
+```
+`03_comparison_demo.py` imports `execute_tool` from `02_agentic_retrieval` to reuse the same tool executor for Semantic RAG's utility tool calls.
+
+### Corporate SSL proxy fix
+```python
+def make_openai_client():
+    import httpx
+    return openai.OpenAI(api_key=api_key, http_client=httpx.Client(verify=False))
+```
+Corporate networks re-sign HTTPS traffic. Python rejects the cert. `verify=False` bypasses this. Remove if not behind a corporate proxy.
+
+### Local embeddings (no API key for search)
+Model: `all-MiniLM-L6-v2` via `chromadb.utils.embedding_functions.SentenceTransformerEmbeddingFunction`.
+First run downloads ~80MB model from HuggingFace and caches it. Subsequent runs load instantly.
+ChromaDB persists to `chroma_db/` (gitignored, auto-created).
+
+### Windows UTF-8
+All string literals use ASCII-safe chars: `[+]`/`[-]` not ✓/✗, `->` not →.
+Run commands prefix: `PYTHONIOENCODING=utf-8 python ...`
+
+### Duplicate reasoning box fix (02_agentic_retrieval.py)
+`print_agent_thought()` only fires when `tool_calls` is non-empty (intermediate steps).
+On the final turn (no tool calls), only `print_final_answer()` fires — same text never appears twice.
+
+---
+
+## Run Commands
+
 ```bash
-python 01_semantic_retrieval.py
-```
+# Side-by-side comparison (recommended starting point)
+PYTHONIOENCODING=utf-8 python 03_comparison_demo.py
 
-### Step 3 — Run agentic retrieval (needs API key)
-```bash
-python 02_agentic_retrieval.py
-```
+# Interactive -- ask your own question
+PYTHONIOENCODING=utf-8 python run_interactive.py
 
-### Step 4 — See the side-by-side comparison
-```bash
-python 03_comparison_demo.py
+# Individual demos
+PYTHONIOENCODING=utf-8 python 01_semantic_retrieval.py   # no API key needed
+PYTHONIOENCODING=utf-8 python 02_agentic_retrieval.py
+
+# Master entry point
+PYTHONIOENCODING=utf-8 python run_poc.py              # all three
+PYTHONIOENCODING=utf-8 python run_poc.py --semantic
+PYTHONIOENCODING=utf-8 python run_poc.py --agentic
+PYTHONIOENCODING=utf-8 python run_poc.py --compare
+PYTHONIOENCODING=utf-8 python run_poc.py --rebuild-kb
 ```
 
 ---
 
-## Technical Stack (What Powers It)
+## Git Workflow
 
-| Component | Technology | Why |
-|---|---|---|
-| Vector store | ChromaDB | Stores and searches document embeddings |
-| Embeddings | sentence-transformers (all-MiniLM-L6-v2) | Local model, no API key needed |
-| Agent brain | Claude claude-sonnet-4-6 (Anthropic) | Reasons, decomposes queries, calls tools |
-| Terminal UI | Rich | Colored panels, tables, live output |
-| Language | Python 3.11 | — |
+Branch: `main` is always stable. All changes go on `feature/` branches.
+
+```bash
+git checkout -b feature/<description>
+# make changes
+git add <files>
+git commit -m "type: short description\n\nLonger explanation of why."
+git push -u origin feature/<description>
+git checkout main
+git merge --no-ff feature/<description> -m "Merge ..."
+git push origin main
+```
+
+Commit type prefixes: `feat:` new feature, `fix:` bug fix, `refactor:` cleanup, `docs:` docs/comments, `chore:` config/gitignore.
 
 ---
 
-## Key People in the Fake Knowledge Base
+## Key People in the Knowledge Base
 
 | Person | Role | Email | Owns |
 |---|---|---|---|
@@ -159,3 +252,14 @@ python 03_comparison_demo.py
 | Omar Hassan | DBA Lead | omar.hassan@technova.io | Databases |
 | James Liu | VP Engineering | james.liu@technova.io | Must approve critical deploys |
 
+---
+
+## Dependencies
+
+| Package | Version | Purpose |
+|---|---|---|
+| openai | 2.26.0 | GPT-4o via chat completions + tool calling |
+| chromadb | 1.5.5 | Vector store (local, persisted) |
+| sentence-transformers | 5.2.3 | Local embeddings — all-MiniLM-L6-v2 |
+| rich | 14.3.3 | Terminal UI |
+| python-dotenv | 1.2.0 | Load .env API key |
