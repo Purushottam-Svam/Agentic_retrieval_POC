@@ -1,8 +1,19 @@
 """
 Enterprise knowledge corpus for TechNova Inc.
+
 Designed so that:
   - Simple queries work well with both semantic and agentic retrieval
   - Complex multi-hop / aggregation queries expose the gap
+
+MULTI-HOP CHAIN (Q2) -- each hop lives in exactly ONE document:
+  INC-001  -> "Payment Gateway service caused the incident"  (service name only, no owner)
+  ARCH-001 -> "Payment Gateway is owned by Sarah Chen"       (owner name, no email)
+  TEAM-001 -> "sarah.chen@technova.io"                       (email only here)
+
+To preserve the chain:
+  - Incident docs mention service names but NOT team lead names
+  - Architecture docs mention team lead names but NOT their emails
+  - TEAM-001 is the ONLY place emails appear for team leads
 """
 
 DOCUMENTS = [
@@ -15,11 +26,11 @@ DOCUMENTS = [
             "On November 14, 2024, TechNova experienced a critical latency spike in the "
             "checkout service between 14:00-16:30 UTC. P99 latency rose from 120 ms to "
             "4200 ms. Root cause: a mis-configured connection pool in the Payment Gateway "
-            "service (version 3.7.2) released earlier that day. The Payment Gateway team, "
-            "led by Sarah Chen, rolled back to v3.7.1 at 16:45 UTC, restoring normal "
-            "latency within 10 minutes. Estimated revenue impact: $48,000. Post-incident "
-            "action items: add connection-pool exhaustion alerts, mandatory load testing "
-            "before payment service deployments."
+            "service (version 3.7.2) released earlier that day. The Payment Gateway team "
+            "rolled back to v3.7.1 at 16:45 UTC, restoring normal latency within 10 minutes. "
+            "Estimated revenue impact: $48,000. Post-incident action items: add "
+            "connection-pool exhaustion alerts, mandatory load testing before payment "
+            "service deployments."
         ),
         "metadata": {"date": "2024-11-14", "severity": "P1", "team": "Platform"},
     },
@@ -31,7 +42,7 @@ DOCUMENTS = [
             "On March 3, 2025, the Authentication service went completely down for 22 "
             "minutes (09:12-09:34 UTC) due to a Redis cache flush triggered accidentally "
             "by a runbook mistake during routine maintenance. All user login attempts "
-            "failed during this window. The Auth team (lead: David Park) implemented a "
+            "failed during this window. The Auth team implemented a "
             "circuit-breaker pattern post-incident to prevent cascading failures. "
             "Recovery time for the Auth service: 22 minutes. Affected users: ~85,000."
         ),
@@ -45,7 +56,7 @@ DOCUMENTS = [
             "Between January 7-9, 2025, the Analytics data pipeline processed jobs at "
             "30% normal throughput due to a Spark configuration regression. No customer-"
             "facing impact, but internal dashboards were delayed by up to 6 hours. "
-            "The Data Engineering team (lead: Priya Mehta) resolved the issue by "
+            "The Data Engineering team resolved the issue by "
             "reverting Spark executor memory settings. Recovery time: 48 hours."
         ),
         "metadata": {"date": "2025-01-07", "severity": "P2", "team": "Data Engineering"},
@@ -60,7 +71,7 @@ DOCUMENTS = [
             "The Payment Gateway service handles all transaction processing for TechNova. "
             "It integrates with Stripe (primary), Braintree (fallback), and internal "
             "fraud detection. The service is owned by the Payments team, led by "
-            "Sarah Chen (sarah.chen@technova.io). SLA: 99.95% uptime. "
+            "Sarah Chen. SLA: 99.95% uptime. "
             "Estimated recovery time objective (RTO) in case of full failure: 15 minutes. "
             "Recovery point objective (RPO): 30 seconds (via Kafka event replay). "
             "Tech stack: Go, PostgreSQL, Redis, Kafka. Current version: 3.7.3."
@@ -73,8 +84,8 @@ DOCUMENTS = [
         "category": "architecture",
         "content": (
             "The Authentication service manages user sessions, OAuth2 flows, and API "
-            "key validation. It is owned by the Auth team, led by David Park "
-            "(david.park@technova.io). SLA: 99.99% uptime. "
+            "key validation. It is owned by the Auth team, led by David Park. "
+            "SLA: 99.99% uptime. "
             "Estimated recovery time objective (RTO): 10 minutes. "
             "Recovery point objective (RPO): 0 seconds (stateless JWT, Redis session "
             "cache only). Tech stack: Python (FastAPI), Redis, PostgreSQL. "
@@ -90,7 +101,7 @@ DOCUMENTS = [
             "The Checkout service orchestrates the end-to-end purchase flow: cart "
             "validation -> inventory check -> payment -> order creation. It calls the "
             "Payment Gateway and Auth services synchronously. Owned by the Commerce "
-            "team, led by Alex Rivera (alex.rivera@technova.io). "
+            "team, led by Alex Rivera. "
             "SLA: 99.9% uptime. RTO: 20 minutes. Tech stack: Node.js, MongoDB, Redis."
         ),
         "metadata": {"team": "Commerce", "lead": "Alex Rivera", "criticality": "critical"},
@@ -101,8 +112,8 @@ DOCUMENTS = [
         "category": "architecture",
         "content": (
             "The Analytics pipeline ingests ~2 TB/day of event data using Kafka -> Spark -> "
-            "Snowflake. Owned by the Data Engineering team, led by Priya Mehta "
-            "(priya.mehta@technova.io). SLA: best-effort (internal tooling). "
+            "Snowflake. Owned by the Data Engineering team, led by Priya Mehta. "
+            "SLA: best-effort (internal tooling). "
             "RTO: 4 hours. RPO: 1 hour. Not customer-facing."
         ),
         "metadata": {"team": "Data Engineering", "lead": "Priya Mehta", "criticality": "medium"},
