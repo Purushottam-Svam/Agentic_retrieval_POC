@@ -1,0 +1,42 @@
+# ── API Keys & Secrets ────────────────────────────────────────────────────────
+# NEVER commit the real .env — it contains your OpenAI API key.
+# Commit only .env.example (which has a placeholder, not a real key).
+.env
+
+# ── Python Virtual Environments ───────────────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+
+# ── Auto-generated: ChromaDB vector store ─────────────────────────────────────
+# This is created on first run by build_knowledge_base().
+# Each developer generates their own local copy — no need to commit it.
+chroma_db/
+
+# ── Python bytecode / cache ───────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# ── Claude Code internal files ────────────────────────────────────────────────
+# These are local AI assistant memory files, not project code.
+.claude/
+
+# ── OS-generated junk ────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Editor / IDE ─────────────────────────────────────────────────────────────
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+
+# ── Build / dist artifacts ────────────────────────────────────────────────────
+dist/
+build/
+*.egg-info/
