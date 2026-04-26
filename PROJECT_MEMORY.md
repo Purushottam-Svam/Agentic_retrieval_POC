@@ -65,16 +65,27 @@ Answer is in ONE document (POL-002). One search finds it. Both systems equivalen
 ---
 
 ### Q2 — Multi-hop (chain across 3 documents)
-> "Who is responsible for the service that caused the November 2024 latency incident?"
+> "Who is responsible for the service that caused the November 2024 latency incident, what was the root cause, and what is their contact email?"
 
-Requires chaining:
-1. INC-001 → "Payment Gateway caused it"
-2. ARCH-001 → "Payment Gateway is owned by Sarah Chen"
-3. TEAM-001 → "sarah.chen@technova.io"
+Requires chaining across exactly 3 documents:
+1. INC-001  → "Payment Gateway service caused it" (service name only, no owner name)
+2. ARCH-001 → "Payment Gateway is owned by Sarah Chen" (owner name, no email)
+3. TEAM-001 → "sarah.chen@technova.io" (email only here)
 
-**Semantic RAG:** Does one search. If TEAM-001 was not in the top-4 results, the email is unavailable — no tool can fix a document that was never retrieved.
-**Agentic:** Follows the chain document by document until it has name + email + root cause.
-**Expected gap:** CLEAREST gap. Both have same utility tools. Difference is pure retrieval.
+**Corpus design rule (critical):**
+- Incident docs (INC-*) name the service but NOT the team lead
+- Architecture docs (ARCH-*) name the team lead but NOT their email
+- TEAM-001 is the ONLY document with contact emails for team leads
+
+This forces genuine multi-hop. Without this rule, INC-001 naming Sarah Chen directly
+would let both systems answer from a single doc -- no chain needed, no gap visible.
+
+**Semantic RAG:** One search. Gets INC-001 (root cause, service name). Probably gets
+ARCH-001 (owner name). Almost certainly misses TEAM-001 (email not returned by a query
+about "latency incident root cause"). Answer will have name but NO email.
+**Agentic:** INC-001 → "Payment Gateway" → searches for owner → ARCH-001 → "Sarah Chen"
+→ searches for contact → TEAM-001 → "sarah.chen@technova.io". Complete answer.
+**Expected gap:** CLEAREST gap. Same tools. Pure retrieval difference.
 
 ---
 

@@ -38,7 +38,7 @@ QUERIES = [
     },
     {
         "label": "Q2 - Multi-hop (who owns the service that caused the Nov 2024 incident?)",
-        "query": "Who is responsible for the service that caused the November 2024 latency incident and what was the root cause?",
+        "query": "Who is responsible for the service that caused the November 2024 latency incident, what was the root cause, and what is their contact email?",
         "expected_docs": ["INC-001", "ARCH-001", "TEAM-001"],
     },
     {

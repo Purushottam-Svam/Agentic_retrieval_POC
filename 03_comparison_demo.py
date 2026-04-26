@@ -102,7 +102,8 @@ QUERIES = [
         ),
         "query": (
             "Who is responsible for the service that caused the "
-            "November 2024 latency incident and what was the root cause?"
+            "November 2024 latency incident, what was the root cause, "
+            "and what is their contact email?"
         ),
         "required_docs": ["INC-001", "ARCH-001", "TEAM-001"],
         "expected_gap": (

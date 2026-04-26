@@ -57,8 +57,8 @@ EXAMPLES = [
     ("1", "SIMPLE",
      "What is the database migration policy?"),
     ("2", "MULTI-HOP",
-     "Who is responsible for the service that caused the November 2024 latency incident "
-     "and what was the root cause?"),
+     "Who is responsible for the service that caused the November 2024 latency incident, "
+     "what was the root cause, and what is their contact email?"),
     ("3", "AGGREGATION",
      "What is the combined recovery time if both the Auth service "
      "and the Payment Gateway fail simultaneously?"),
