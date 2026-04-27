@@ -89,19 +89,24 @@ about "latency incident root cause"). Answer will have name but NO email.
 
 ---
 
-### Q3 — Aggregation (math across 3 documents)
-> "Combined recovery time if the Auth service, Payment Gateway, AND Checkout all fail simultaneously?"
+### Q3 — Aggregation (indirect query, math across 3 documents)
+> "What is the total recovery time we should plan for if all customer-facing services go down at once?"
 
 - ARCH-002 → Auth RTO = 10 minutes
 - ARCH-001 → Payment Gateway RTO = 15 minutes
 - ARCH-003 → Checkout RTO = 20 minutes
 - Answer = 10 + 15 + 20 = **45 minutes**
 
-With 3 architecture docs needed and only top-4 results returned, at least one ARCH doc
-is often pushed out by competing docs (runbooks, incidents, FAQs).
-**Semantic RAG:** Missing one RTO, calculates wrong total (e.g. 25 min or 35 min instead of 45).
-**Agentic:** Searches each service by name explicitly, always collects all 3, calls calculate(10+15+20)=45.
-**Expected gap:** CLEAR. Wrong number vs correct number.
+Key design: query says "customer-facing services" -- NOT the service names.
+Semantic RAG has nothing specific to anchor to, so its search returns incidents/runbooks/FAQs
+(nearest to "downtime" semantically) rather than the ARCH docs with RTO values.
+**Semantic RAG:** Returns wrong docs, cannot find the RTOs, gives incomplete/wrong answer.
+**Agentic:** Reasons "customer-facing -> which services? -> search each -> find RTO -> calculate".
+Searches ARCH-001, ARCH-002, ARCH-003 by name, calls calculate(10+15+20)=45.
+**Expected gap:** CLEAR. Semantic RAG retrieves wrong docs; agentic identifies the right docs first.
+
+WARNING: Do NOT change query to explicitly name services ("Auth service, Payment Gateway...").
+That causes all 3 ARCH docs to be returned by vector search directly, closing the gap.
 
 ---
 
