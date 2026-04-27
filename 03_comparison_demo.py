@@ -118,53 +118,61 @@ QUERIES = [
         "complexity": "AGGREGATION",
         "complexity_color": "cyan",
         "complexity_explanation": (
-            "Needs numbers from 2 documents AND arithmetic:\n"
+            "Needs RTO numbers from 3 separate documents AND arithmetic:\n"
             "  ARCH-002 (Auth Service)    ->  RTO = 10 minutes\n"
             "  ARCH-001 (Payment Gateway) ->  RTO = 15 minutes\n"
-            "  10 + 15 = 25 minutes combined\n\n"
-            "Both approaches now have the calculate tool.\n"
-            "If semantic RAG's one search returns both ARCH-001 and ARCH-002\n"
-            "(likely, since both match the query), it can get the right answer.\n"
-            "The gap here is smaller -- it's mainly about citation traceability."
+            "  ARCH-003 (Checkout)        ->  RTO = 20 minutes\n"
+            "  10 + 15 + 20 = 45 minutes combined\n\n"
+            "One vector search returns the 4 most similar chunks.\n"
+            "With 3 architecture docs needed, at least one is likely pushed\n"
+            "out of the top-4 by other documents (runbooks, incidents, etc.).\n"
+            "Semantic RAG will have a missing RTO and calculate the wrong total.\n"
+            "Agentic searches for each service explicitly, collects all 3 RTOs,\n"
+            "then calls calculate(10 + 15 + 20) = 45."
         ),
         "query": (
-            "What is the combined recovery time if both the Auth service "
-            "and the Payment Gateway fail simultaneously?"
+            "What is the combined recovery time if the Auth service, "
+            "Payment Gateway, and Checkout service all fail simultaneously?"
         ),
-        "required_docs": ["ARCH-001", "ARCH-002"],
+        "required_docs": ["ARCH-001", "ARCH-002", "ARCH-003"],
         "expected_gap": (
-            "GAP NARROWS -- both have calculate tool.\n"
-            "If both docs were retrieved, semantic RAG may give the correct answer.\n"
-            "Agentic is more reliable because it explicitly searches for each service\n"
-            "separately and cites both source documents."
+            "CLEAR GAP -- 3 docs needed, one search returns at most 4 results.\n"
+            "Semantic RAG likely misses one architecture doc and calculates\n"
+            "the wrong total (e.g. 25 min instead of 45 min).\n"
+            "Agentic searches per service, always gets all 3, always gets 45 min."
         ),
     },
     {
-        "label": "Q4 -- Conditional + date",
+        "label": "Q4 -- Conditional + double policy",
         "complexity": "CONDITIONAL",
         "complexity_color": "magenta",
         "complexity_explanation": (
-            "Needs policy + date check + contact lookup:\n"
-            "  POL-001  ->  Friday after 15:00 UTC is a deployment freeze\n"
-            "  TODAY    ->  Is it Friday? What time is it?\n"
-            "  TEAM-001 ->  Who are the approvers and their emails?\n\n"
-            "Both approaches now have get_today_info.\n"
-            "Semantic RAG can check the date -- but only if it retrieved POL-001\n"
-            "AND TEAM-001 in its one search. TEAM-001 might have been missed.\n"
-            "Agentic will search for the policy, then separately search for the\n"
-            "approvers, ensuring nothing is missed."
+            "Requires TWO semantically distant policies + date check + contacts:\n"
+            "  POL-001  ->  Deployment policy: Friday before 15:00 UTC is allowed;\n"
+            "               Checkout (critical service) needs team lead + VP approval\n"
+            "  POL-002  ->  DB migration policy: needs DBA review + staging dry-run\n"
+            "  TODAY    ->  2pm UTC = 14:00 UTC, which is before the 15:00 cutoff\n"
+            "  TEAM-001 ->  Alex Rivera (Checkout lead), Omar Hassan (DBA), James Liu (VP)\n\n"
+            "The query mentions 'deploy Checkout' -- semantic RAG's single search\n"
+            "pulls deployment-related docs (POL-001) but DB migration policy (POL-002)\n"
+            "is semantically distant from deployment questions.\n"
+            "Semantic RAG answers the deployment half but completely misses\n"
+            "the DB migration approval requirements.\n"
+            "Agentic searches for deployment rules, then separately for migration rules."
         ),
         "query": (
-            "We want to deploy a new feature to the Checkout service "
-            "this Friday afternoon. What approvals do we need and who "
-            "should we contact?"
+            "A developer wants to deploy the Checkout service and run a "
+            "database migration this Friday at 2pm UTC. What approvals are "
+            "needed for both, and who should they contact?"
         ),
-        "required_docs": ["POL-001", "TEAM-001"],
+        "required_docs": ["POL-001", "POL-002", "TEAM-001"],
         "expected_gap": (
-            "GAP PARTIALLY NARROWS -- both have get_today_info.\n"
-            "Semantic RAG can now resolve the date condition.\n"
-            "But if TEAM-001 was not retrieved, it still cannot name the approvers.\n"
-            "Agentic searches for both the policy and the team separately."
+            "CLEAR GAP -- two semantically distant policies in one question.\n"
+            "Semantic RAG: answers deployment half (Friday 14:00 is allowed, who to call).\n"
+            "              Silently skips DB migration requirements (POL-002 not retrieved).\n"
+            "Agentic:      covers BOTH -- deployment policy + migration policy + all contacts.\n"
+            "The dangerous real-world scenario: developer thinks they have all approvals\n"
+            "but missed the DBA sign-off requirement entirely."
         ),
     },
 ]
@@ -468,19 +476,23 @@ def show_final_comparison(
         ),
         "AGGREGATION": (
             "cyan",
-            "[cyan]Gap narrows -- both had the calculate tool.[/cyan]\n\n"
-            "If semantic RAG retrieved both ARCH-001 and ARCH-002, it likely got the\n"
-            "right answer (25 minutes). Agentic is more reliable because it searched\n"
-            "for each service explicitly and always cites both source documents.\n"
-            "For aggregation, agentic wins on reliability and traceability, not always answer."
+            "[cyan]Clear gap -- 3 services needed, one search can miss one.[/cyan]\n\n"
+            "Check the total in both answers.\n"
+            "Semantic RAG likely retrieved 2 of the 3 architecture docs and calculated\n"
+            "the wrong total (25 min instead of 45 min) -- it simply didn't have the third RTO.\n"
+            "Agentic searched for each service by name, collected all 3 RTOs, and\n"
+            "called calculate(10 + 15 + 20) = 45. The answer is traceable and correct."
         ),
         "CONDITIONAL": (
             "magenta",
-            "[magenta]Gap partially narrows -- both had get_today_info.[/magenta]\n\n"
-            "Semantic RAG can now check today's date and apply the policy rule.\n"
-            "The remaining gap: if TEAM-001 was not in the top-4 results, semantic RAG\n"
-            "cannot name the approvers or give their contact details.\n"
-            "Agentic searched for the policy, then searched for the team separately."
+            "[magenta]Clear gap -- two semantically distant policies, one search.[/magenta]\n\n"
+            "Check whether both answers mention the DATABASE MIGRATION requirements.\n"
+            "Semantic RAG answered the deployment half (Friday 14:00 UTC is allowed)\n"
+            "but almost certainly missed POL-002 (DB migration policy) -- it is\n"
+            "semantically distant from a deployment query.\n"
+            "The developer reading semantic RAG's answer would proceed thinking\n"
+            "they have all approvals, but they never got DBA sign-off.\n"
+            "Agentic covered both -- deployment rules AND migration rules AND contacts."
         ),
     }
     border_color, verdict_text = verdicts.get(q["complexity"], ("white", ""))
@@ -553,18 +565,21 @@ def run_comparison():
 
     console.print()
     console.print(Panel(
-        "[bold]What the 4 queries collectively prove:[/bold]\n\n"
-        "  SIMPLE      -> both approaches equivalent. Use semantic RAG (faster, cheaper).\n\n"
-        "  MULTI-HOP   -> clearest gap. Same tools, same model. Semantic RAG got one\n"
-        "                 search, missed the chain. Agentic followed it end to end.\n\n"
-        "  AGGREGATION -> gap narrows with fair tool access. Both can calculate now.\n"
-        "                 Agentic still more reliable -- searches each doc explicitly.\n\n"
-        "  CONDITIONAL -> gap narrows. Both can check today's date. Remaining gap:\n"
-        "                 whether the right docs landed in that one search or not.\n\n"
+        "[bold]The gap grows with query complexity -- by design:[/bold]\n\n"
+        "  Q1 SIMPLE        -> no gap. One doc, one search. Use semantic RAG here.\n\n"
+        "  Q2 MULTI-HOP     -> gap appears. Semantic RAG stops after one search.\n"
+        "                      Missing: contact email that lives 3 hops away.\n\n"
+        "  Q3 AGGREGATION   -> gap widens. 3 services needed, one search misses one.\n"
+        "                      Semantic RAG calculates the wrong total (25 not 45 min).\n"
+        "                      Agentic searches per service, always gets all 3.\n\n"
+        "  Q4 DOUBLE POLICY -> largest gap. Two semantically distant policies.\n"
+        "                      Semantic RAG answers deployment half, silently skips\n"
+        "                      DB migration requirements -- a real compliance risk.\n"
+        "                      Agentic searches each concern separately.\n\n"
         "[bold]Core insight:[/bold]\n"
         "The agentic advantage is not about having more tools.\n"
         "It is about the LLM controlling the retrieval -- deciding what to look for,\n"
-        "following chains across documents, and searching until the answer is complete.",
+        "searching multiple times, and not stopping until the answer is complete.",
         title="[bold]Summary[/bold]",
         border_style="white",
         padding=(1, 2),

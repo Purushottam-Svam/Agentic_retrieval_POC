@@ -261,11 +261,11 @@ QUERIES = [
     },
     {
         "label": "Q3 - Aggregation (combined RTO if Auth + Payment both fail)",
-        "query": "What is the combined recovery time if both the Auth service and the Payment Gateway fail simultaneously?",
+        "query": "What is the combined recovery time if the Auth service, Payment Gateway, and Checkout service all fail simultaneously?",
     },
     {
         "label": "Q4 - Conditional (deploy new feature this Friday, what approvals?)",
-        "query": "We want to deploy a new feature to the Checkout service this Friday afternoon. What approvals do we need and who should we contact?",
+        "query": "A developer wants to deploy the Checkout service and run a database migration this Friday at 2pm UTC. What approvals are needed for both, and who should they contact?",
     },
 ]
 
