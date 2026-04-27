@@ -120,6 +120,13 @@ Guidelines:
 6. After gathering all facts, synthesize a clear, complete answer with document references (e.g., [ARCH-001]).
 7. Be explicit about what you found and from which documents.
 
+BEFORE giving your final answer, reflect:
+- Have I addressed every distinct part of the question?
+- If the question asks about a category (e.g. "all customer-facing services", "all critical systems"),
+  have I searched for and confirmed every member of that category -- not just the first ones I found?
+- If I am aggregating values (summing, comparing), am I certain I have found ALL relevant items?
+  If not, search for what is missing before concluding.
+
 Think step by step. Show your reasoning."""
 
 
