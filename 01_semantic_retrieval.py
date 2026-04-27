@@ -43,13 +43,13 @@ QUERIES = [
     },
     {
         "label": "Q3 - Aggregation (combined RTO if Auth + Payment both fail)",
-        "query": "What is the combined recovery time if both the Auth service and the Payment Gateway fail simultaneously?",
-        "expected_docs": ["ARCH-001", "ARCH-002"],
+        "query": "What is the combined recovery time if the Auth service, Payment Gateway, and Checkout service all fail simultaneously?",
+        "expected_docs": ["ARCH-001", "ARCH-002", "ARCH-003"],
     },
     {
         "label": "Q4 - Conditional (deploy new feature this Friday, what approvals?)",
-        "query": "We want to deploy a new feature to the Checkout service this Friday afternoon. What approvals do we need and who should we contact?",
-        "expected_docs": ["POL-001", "TEAM-001", "FAQ-002"],
+        "query": "A developer wants to deploy the Checkout service and run a database migration this Friday at 2pm UTC. What approvals are needed for both, and who should they contact?",
+        "expected_docs": ["POL-001", "POL-002", "TEAM-001"],
     },
 ]
 

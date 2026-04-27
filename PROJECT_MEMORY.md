@@ -89,27 +89,33 @@ about "latency incident root cause"). Answer will have name but NO email.
 
 ---
 
-### Q3 — Aggregation (math across 2 documents)
-> "Combined recovery time if both Auth AND Payment Gateway fail simultaneously?"
+### Q3 — Aggregation (math across 3 documents)
+> "Combined recovery time if the Auth service, Payment Gateway, AND Checkout all fail simultaneously?"
 
 - ARCH-002 → Auth RTO = 10 minutes
 - ARCH-001 → Payment Gateway RTO = 15 minutes
-- 10 + 15 = **25 minutes**
+- ARCH-003 → Checkout RTO = 20 minutes
+- Answer = 10 + 15 + 20 = **45 minutes**
 
-**Semantic RAG:** Has `calculate` tool now. If both docs were retrieved (likely — both match the query), it can give the correct answer.
-**Agentic:** Explicitly searches for each service, always cites both source documents.
-**Expected gap:** NARROWS with fair tool access. Gap is now about reliability and traceability, not the math itself.
+With 3 architecture docs needed and only top-4 results returned, at least one ARCH doc
+is often pushed out by competing docs (runbooks, incidents, FAQs).
+**Semantic RAG:** Missing one RTO, calculates wrong total (e.g. 25 min or 35 min instead of 45).
+**Agentic:** Searches each service by name explicitly, always collects all 3, calls calculate(10+15+20)=45.
+**Expected gap:** CLEAR. Wrong number vs correct number.
 
 ---
 
-### Q4 — Conditional + date-aware
-> "Deploy to Checkout this Friday afternoon. What approvals do we need?"
+### Q4 — Double policy + date (v2)
+> "Deploy Checkout AND run a DB migration this Friday at 2pm UTC. What approvals for both?"
 
-Requires: POL-001 (Friday freeze rule) + `get_today_info()` (is it actually Friday?) + TEAM-001 (approver contacts).
+Requires two semantically distant policies + date check + contacts:
+- POL-001 → Deployment policy: Friday 14:00 UTC is before the 15:00 cutoff, so allowed; Checkout (critical) needs team lead + VP
+- POL-002 → DB migration policy: needs DBA review + staging dry-run (semantically unrelated to deployment)
+- TEAM-001 → Alex Rivera (Checkout lead), Omar Hassan (DBA lead), James Liu (VP)
 
-**Semantic RAG:** Has `get_today_info` now — can resolve the date condition. Gap remains if TEAM-001 was not retrieved (cannot name approvers).
-**Agentic:** Searches policy, checks date, then separately searches for the team.
-**Expected gap:** PARTIALLY NARROWS. Date condition closes. Approver contact may still be missing.
+**Semantic RAG:** Query about "deploy Checkout Friday" pulls POL-001 but NOT POL-002 (migrations are a different topic). Answers deployment half correctly, silently ignores migration requirements.
+**Agentic:** Searches for deployment rules, then separately searches for migration rules, then gets contacts. Complete answer.
+**Expected gap:** CLEAR and high-stakes. Semantic RAG gives a dangerous partial answer — developer thinks they have all approvals but missed DBA sign-off.
 
 ---
 
