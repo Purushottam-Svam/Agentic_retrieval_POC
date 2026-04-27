@@ -123,23 +123,25 @@ QUERIES = [
             "  ARCH-001 (Payment Gateway) ->  RTO = 15 minutes\n"
             "  ARCH-003 (Checkout)        ->  RTO = 20 minutes\n"
             "  10 + 15 + 20 = 45 minutes combined\n\n"
-            "One vector search returns the 4 most similar chunks.\n"
-            "With 3 architecture docs needed, at least one is likely pushed\n"
-            "out of the top-4 by other documents (runbooks, incidents, etc.).\n"
-            "Semantic RAG will have a missing RTO and calculate the wrong total.\n"
-            "Agentic searches for each service explicitly, collects all 3 RTOs,\n"
-            "then calls calculate(10 + 15 + 20) = 45."
+            "The query does NOT name the services -- it says 'customer-facing'.\n"
+            "Semantic RAG has nothing specific to search for, so it retrieves\n"
+            "whatever is nearest to 'customer-facing services recovery' --\n"
+            "likely incidents, runbooks, or FAQs, not all 3 ARCH docs.\n"
+            "Agentic reasons: 'customer-facing -> which services? -> search each\n"
+            "-> find RTOs -> calculate.' It works the problem step by step."
         ),
         "query": (
-            "What is the combined recovery time if the Auth service, "
-            "Payment Gateway, and Checkout service all fail simultaneously?"
+            "What is the total recovery time we should plan for if all "
+            "customer-facing services go down at once?"
         ),
         "required_docs": ["ARCH-001", "ARCH-002", "ARCH-003"],
         "expected_gap": (
-            "CLEAR GAP -- 3 docs needed, one search returns at most 4 results.\n"
-            "Semantic RAG likely misses one architecture doc and calculates\n"
-            "the wrong total (e.g. 25 min instead of 45 min).\n"
-            "Agentic searches per service, always gets all 3, always gets 45 min."
+            "CLEAR GAP -- query is indirect, service names not mentioned.\n"
+            "Semantic RAG retrieves docs nearest to 'customer-facing downtime'\n"
+            "which are likely incidents/runbooks, not architecture docs with RTOs.\n"
+            "It either gives an incomplete total or says the info is not available.\n"
+            "Agentic identifies which services are customer-facing, searches each\n"
+            "architecture doc, collects all 3 RTOs, calculates 10+15+20=45 min."
         ),
     },
     {
@@ -476,12 +478,14 @@ def show_final_comparison(
         ),
         "AGGREGATION": (
             "cyan",
-            "[cyan]Clear gap -- 3 services needed, one search can miss one.[/cyan]\n\n"
-            "Check the total in both answers.\n"
-            "Semantic RAG likely retrieved 2 of the 3 architecture docs and calculated\n"
-            "the wrong total (25 min instead of 45 min) -- it simply didn't have the third RTO.\n"
-            "Agentic searched for each service by name, collected all 3 RTOs, and\n"
-            "called calculate(10 + 15 + 20) = 45. The answer is traceable and correct."
+            "[cyan]Clear gap -- indirect query, service names not in the question.[/cyan]\n\n"
+            "Check whether semantic RAG identified all 3 customer-facing services\n"
+            "and whether it calculated a total at all.\n"
+            "Because the query says 'customer-facing services' not specific names,\n"
+            "semantic RAG's single search likely returned incidents or runbooks --\n"
+            "not the architecture docs that contain the RTO values.\n"
+            "Agentic reasoned about what 'customer-facing' means, searched each\n"
+            "service architecture doc, and called calculate(10 + 15 + 20) = 45."
         ),
         "CONDITIONAL": (
             "magenta",

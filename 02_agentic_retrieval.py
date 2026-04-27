@@ -261,7 +261,7 @@ QUERIES = [
     },
     {
         "label": "Q3 - Aggregation (combined RTO if Auth + Payment both fail)",
-        "query": "What is the combined recovery time if the Auth service, Payment Gateway, and Checkout service all fail simultaneously?",
+        "query": "What is the total recovery time we should plan for if all customer-facing services go down at once?",
     },
     {
         "label": "Q4 - Conditional (deploy new feature this Friday, what approvals?)",

@@ -60,8 +60,7 @@ EXAMPLES = [
      "Who is responsible for the service that caused the November 2024 latency incident, "
      "what was the root cause, and what is their contact email?"),
     ("3", "AGGREGATION",
-     "What is the combined recovery time if the Auth service, Payment Gateway, "
-     "and Checkout service all fail simultaneously?"),
+     "What is the total recovery time we should plan for if all customer-facing services go down at once?"),
     ("4", "CONDITIONAL",
      "A developer wants to deploy the Checkout service and run a database migration "
      "this Friday at 2pm UTC. What approvals are needed for both, and who should they contact?"),
