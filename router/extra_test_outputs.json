@@ -1,0 +1,514 @@
+{
+  "summary": {
+    "total": 50,
+    "correct": 46,
+    "accuracy": 0.92,
+    "simple_accuracy": 0.84,
+    "complex_accuracy": 1.0,
+    "total_inference_ms": 4911.7,
+    "avg_inference_ms": 98.23,
+    "false_negatives": 0
+  },
+  "results": [
+    {
+      "id": "Q01",
+      "query": "What is the RTO for the Auth service?",
+      "expected": "SIMPLE",
+      "type": "single-fact lookup",
+      "why": "RTO is a single field in ARCH-002. One search finds it.",
+      "decision": "SIMPLE",
+      "confidence": 0.982,
+      "correct": true
+    },
+    {
+      "id": "Q02",
+      "query": "Who leads the Payments team?",
+      "expected": "SIMPLE",
+      "type": "single-fact lookup",
+      "why": "Team lead for Payments is in ARCH-001 or TEAM-001. One search.",
+      "decision": "SIMPLE",
+      "confidence": 0.98,
+      "correct": true
+    },
+    {
+      "id": "Q03",
+      "query": "What is the deployment freeze window on Fridays?",
+      "expected": "SIMPLE",
+      "type": "policy lookup",
+      "why": "Friday deployment cutoff is a single fact in POL-001.",
+      "decision": "SIMPLE",
+      "confidence": 0.9826,
+      "correct": true
+    },
+    {
+      "id": "Q04",
+      "query": "What does RTO stand for?",
+      "expected": "SIMPLE",
+      "type": "definition",
+      "why": "Terminology definition in a single doc. No chaining.",
+      "decision": "SIMPLE",
+      "confidence": 0.9824,
+      "correct": true
+    },
+    {
+      "id": "Q05",
+      "query": "Who is Omar Hassan?",
+      "expected": "SIMPLE",
+      "type": "person lookup",
+      "why": "Omar Hassan's role is in TEAM-001. Single doc.",
+      "decision": "SIMPLE",
+      "confidence": 0.9777,
+      "correct": true
+    },
+    {
+      "id": "Q06",
+      "query": "What is the on-call escalation policy?",
+      "expected": "SIMPLE",
+      "type": "policy lookup",
+      "why": "Escalation policy lives in one policy document.",
+      "decision": "SIMPLE",
+      "confidence": 0.9829,
+      "correct": true
+    },
+    {
+      "id": "Q07",
+      "query": "What services does the Auth service depend on?",
+      "expected": "SIMPLE",
+      "type": "architecture lookup",
+      "why": "Dependencies listed in ARCH-002. Single doc.",
+      "decision": "SIMPLE",
+      "confidence": 0.9682,
+      "correct": true
+    },
+    {
+      "id": "Q08",
+      "query": "What is the checkout service RTO?",
+      "expected": "SIMPLE",
+      "type": "single-fact lookup",
+      "why": "RTO is a single field in ARCH-003.",
+      "decision": "SIMPLE",
+      "confidence": 0.9829,
+      "correct": true
+    },
+    {
+      "id": "Q09",
+      "query": "How many rows trigger the pt-online-schema-change requirement?",
+      "expected": "SIMPLE",
+      "type": "policy lookup",
+      "why": "The 10M row threshold is one fact in POL-002.",
+      "decision": "COMPLEX",
+      "confidence": 0.9369,
+      "correct": false
+    },
+    {
+      "id": "Q10",
+      "query": "What is a P1 incident?",
+      "expected": "SIMPLE",
+      "type": "definition",
+      "why": "P1 definition is a single entry in FAQ or policy doc.",
+      "decision": "SIMPLE",
+      "confidence": 0.9814,
+      "correct": true
+    },
+    {
+      "id": "Q11",
+      "query": "Who is the VP of Engineering at TechNova?",
+      "expected": "SIMPLE",
+      "type": "person lookup",
+      "why": "James Liu is listed in TEAM-001. One search.",
+      "decision": "SIMPLE",
+      "confidence": 0.982,
+      "correct": true
+    },
+    {
+      "id": "Q12",
+      "query": "What is the payment gateway's primary payment processor?",
+      "expected": "SIMPLE",
+      "type": "architecture lookup",
+      "why": "Integration details (Stripe primary) in ARCH-001.",
+      "decision": "SIMPLE",
+      "confidence": 0.9819,
+      "correct": true
+    },
+    {
+      "id": "Q13",
+      "query": "What monitoring tool does TechNova use for PagerDuty alerts?",
+      "expected": "SIMPLE",
+      "type": "tool lookup",
+      "why": "Monitoring tooling mentioned in a single FAQ or runbook doc.",
+      "decision": "SIMPLE",
+      "confidence": 0.8222,
+      "correct": true
+    },
+    {
+      "id": "Q14",
+      "query": "What is the RPO for the Analytics pipeline?",
+      "expected": "SIMPLE",
+      "type": "single-fact lookup",
+      "why": "RPO is a single field in ARCH-004.",
+      "decision": "SIMPLE",
+      "confidence": 0.9829,
+      "correct": true
+    },
+    {
+      "id": "Q15",
+      "query": "What is the purpose of the staging dry-run in database migrations?",
+      "expected": "SIMPLE",
+      "type": "policy explanation",
+      "why": "Dry-run rationale is explained in POL-002. One doc.",
+      "decision": "SIMPLE",
+      "confidence": 0.8733,
+      "correct": true
+    },
+    {
+      "id": "Q16",
+      "query": "Who leads the Data Engineering team?",
+      "expected": "SIMPLE",
+      "type": "person lookup",
+      "why": "Priya Mehta's role in TEAM-001 or ARCH-004. One search.",
+      "decision": "SIMPLE",
+      "confidence": 0.9805,
+      "correct": true
+    },
+    {
+      "id": "Q17",
+      "query": "What Jira tag must be used for production deployment tickets?",
+      "expected": "SIMPLE",
+      "type": "policy lookup",
+      "why": "The 'prod-deploy' tag requirement is one fact in POL-001.",
+      "decision": "SIMPLE",
+      "confidence": 0.9443,
+      "correct": true
+    },
+    {
+      "id": "Q18",
+      "query": "What was the root cause of the incident in Q1 2025?",
+      "expected": "SIMPLE",
+      "type": "incident lookup",
+      "why": "Root cause of a specific incident is in one INC-* doc.",
+      "decision": "COMPLEX",
+      "confidence": 0.913,
+      "correct": false
+    },
+    {
+      "id": "Q19",
+      "query": "What is the Analytics pipeline's data ingestion volume per day?",
+      "expected": "SIMPLE",
+      "type": "architecture lookup",
+      "why": "2TB/day figure is one fact in ARCH-004.",
+      "decision": "SIMPLE",
+      "confidence": 0.9584,
+      "correct": true
+    },
+    {
+      "id": "Q20",
+      "query": "What does the Checkout service do?",
+      "expected": "SIMPLE",
+      "type": "service description",
+      "why": "Service description is the opening paragraph of ARCH-003.",
+      "decision": "SIMPLE",
+      "confidence": 0.982,
+      "correct": true
+    },
+    {
+      "id": "Q21",
+      "query": "What version of the Payment Gateway caused the November 2024 incident?",
+      "expected": "SIMPLE",
+      "type": "incident lookup",
+      "why": "Version 3.7.2 is a single fact in INC-001.",
+      "decision": "COMPLEX",
+      "confidence": 0.9426,
+      "correct": false
+    },
+    {
+      "id": "Q22",
+      "query": "What is the rollback version the team used to resolve the November 2024 incident?",
+      "expected": "SIMPLE",
+      "type": "incident lookup",
+      "why": "Rollback to 3.7.1 is a single fact in INC-001.",
+      "decision": "COMPLEX",
+      "confidence": 0.9727,
+      "correct": false
+    },
+    {
+      "id": "Q23",
+      "query": "How long did the November 2024 latency spike last?",
+      "expected": "SIMPLE",
+      "type": "incident lookup",
+      "why": "Duration (14:00-16:30 UTC) is in INC-001. One search.",
+      "decision": "SIMPLE",
+      "confidence": 0.8285,
+      "correct": true
+    },
+    {
+      "id": "Q24",
+      "query": "What Kafka pipeline does the Analytics service use?",
+      "expected": "SIMPLE",
+      "type": "architecture lookup",
+      "why": "Kafka -> Spark -> Snowflake is described in ARCH-004.",
+      "decision": "SIMPLE",
+      "confidence": 0.98,
+      "correct": true
+    },
+    {
+      "id": "Q25",
+      "query": "What is the TechNova policy for hotfix deployments?",
+      "expected": "SIMPLE",
+      "type": "policy lookup",
+      "why": "Hotfix policy is one section in POL-001.",
+      "decision": "SIMPLE",
+      "confidence": 0.983,
+      "correct": true
+    },
+    {
+      "id": "Q26",
+      "query": "What is the combined RTO for Auth and Checkout if both go down simultaneously?",
+      "expected": "COMPLEX",
+      "type": "aggregation",
+      "why": "Needs ARCH-002 (Auth RTO=10) + ARCH-003 (Checkout RTO=20) + arithmetic.",
+      "decision": "COMPLEX",
+      "confidence": 0.9758,
+      "correct": true
+    },
+    {
+      "id": "Q27",
+      "query": "Which team lead should I contact if the service that caused the November 2024 incident fails again?",
+      "expected": "COMPLEX",
+      "type": "multi-hop",
+      "why": "INC-001 \u2192 service name \u2192 ARCH-001 \u2192 team lead name. Two hops.",
+      "decision": "COMPLEX",
+      "confidence": 0.9831,
+      "correct": true
+    },
+    {
+      "id": "Q28",
+      "query": "Can I deploy to production this Saturday, and if so who approves it?",
+      "expected": "COMPLEX",
+      "type": "date-conditional",
+      "why": "Needs today's date, then POL-001 weekend rules, then TEAM-001 contacts.",
+      "decision": "COMPLEX",
+      "confidence": 0.9736,
+      "correct": true
+    },
+    {
+      "id": "Q29",
+      "query": "What is the email of the lead of the service with the highest RTO?",
+      "expected": "COMPLEX",
+      "type": "multi-hop + aggregation",
+      "why": "Needs all ARCH-* docs to compare RTOs, then TEAM-001 for the email of the winner.",
+      "decision": "COMPLEX",
+      "confidence": 0.9768,
+      "correct": true
+    },
+    {
+      "id": "Q30",
+      "query": "If I need approval from both the DBA lead and the VP of Engineering, who do I email?",
+      "expected": "COMPLEX",
+      "type": "multi-person lookup",
+      "why": "Needs TEAM-001 twice (two different roles). Involves combining two lookups.",
+      "decision": "COMPLEX",
+      "confidence": 0.9816,
+      "correct": true
+    },
+    {
+      "id": "Q31",
+      "query": "Which services were involved in incidents in 2024 and who owns each one?",
+      "expected": "COMPLEX",
+      "type": "multi-hop + multi-doc",
+      "why": "Needs INC-001, INC-002, INC-003 each \u2192 then ARCH-* for each owner.",
+      "decision": "COMPLEX",
+      "confidence": 0.9798,
+      "correct": true
+    },
+    {
+      "id": "Q32",
+      "query": "What is the total downtime exposure (sum of all RTOs) across every service in the knowledge base?",
+      "expected": "COMPLEX",
+      "type": "aggregation",
+      "why": "Needs ARCH-001 + ARCH-002 + ARCH-003 + ARCH-004 RTOs summed. Full scan + math.",
+      "decision": "COMPLEX",
+      "confidence": 0.9774,
+      "correct": true
+    },
+    {
+      "id": "Q33",
+      "query": "I want to deploy the Auth service on Monday morning at 9am UTC. What approvals do I need and who do I contact?",
+      "expected": "COMPLEX",
+      "type": "date-conditional + contact lookup",
+      "why": "Needs date check (POL-001), then team lead name (ARCH-002), then email (TEAM-001).",
+      "decision": "COMPLEX",
+      "confidence": 0.9787,
+      "correct": true
+    },
+    {
+      "id": "Q34",
+      "query": "What is the contact email of the person responsible for the service that had the connection pool bug?",
+      "expected": "COMPLEX",
+      "type": "multi-hop",
+      "why": "INC-001 (connection pool = Payment Gateway) \u2192 ARCH-001 (Sarah Chen) \u2192 TEAM-001 (email).",
+      "decision": "COMPLEX",
+      "confidence": 0.9768,
+      "correct": true
+    },
+    {
+      "id": "Q35",
+      "query": "If all four TechNova services fail, what is the maximum time before full recovery?",
+      "expected": "COMPLEX",
+      "type": "aggregation",
+      "why": "Needs all four ARCH-* RTOs, then find the max (not sum). Multi-doc comparison.",
+      "decision": "COMPLEX",
+      "confidence": 0.9797,
+      "correct": true
+    },
+    {
+      "id": "Q36",
+      "query": "Which service has the lowest RTO and what team is responsible for it?",
+      "expected": "COMPLEX",
+      "type": "aggregation + lookup",
+      "why": "Must retrieve all RTOs, find minimum, then identify the team. Multi-doc.",
+      "decision": "COMPLEX",
+      "confidence": 0.9764,
+      "correct": true
+    },
+    {
+      "id": "Q37",
+      "query": "What approvals are needed to run a DB migration and deploy a new microservice on the same Friday?",
+      "expected": "COMPLEX",
+      "type": "compound policy",
+      "why": "POL-001 (deploy) + POL-002 (migration) + date check (Friday window) all needed.",
+      "decision": "COMPLEX",
+      "confidence": 0.9818,
+      "correct": true
+    },
+    {
+      "id": "Q38",
+      "query": "What were the root causes of all three 2024 incidents and do any share a common pattern?",
+      "expected": "COMPLEX",
+      "type": "multi-doc synthesis",
+      "why": "Needs INC-001 + INC-002 + INC-003 and reasoning across them.",
+      "decision": "COMPLEX",
+      "confidence": 0.9808,
+      "correct": true
+    },
+    {
+      "id": "Q39",
+      "query": "Who do I page if both the Auth service and the Payment Gateway are down at 3am?",
+      "expected": "COMPLEX",
+      "type": "multi-person + on-call",
+      "why": "Needs ARCH-001 + ARCH-002 team leads, then TEAM-001 for both contacts.",
+      "decision": "COMPLEX",
+      "confidence": 0.9808,
+      "correct": true
+    },
+    {
+      "id": "Q40",
+      "query": "What is the difference in RTO between the fastest and slowest customer-facing service?",
+      "expected": "COMPLEX",
+      "type": "aggregation + arithmetic",
+      "why": "Needs all ARCH-* RTOs, finds min and max, subtracts. Multi-doc + math.",
+      "decision": "COMPLEX",
+      "confidence": 0.9671,
+      "correct": true
+    },
+    {
+      "id": "Q41",
+      "query": "Can a developer with no direct team lead deploy a critical service, and what is the escalation path?",
+      "expected": "COMPLEX",
+      "type": "policy + contact chain",
+      "why": "POL-001 for rules, then TEAM-001 for escalation contacts. Two docs.",
+      "decision": "COMPLEX",
+      "confidence": 0.9813,
+      "correct": true
+    },
+    {
+      "id": "Q42",
+      "query": "What is the email address of the person who owns the service with the highest number of historical incidents?",
+      "expected": "COMPLEX",
+      "type": "multi-hop + aggregation",
+      "why": "Count incidents per service across INC-*, find the most, then chain to ARCH-* then TEAM-001.",
+      "decision": "COMPLEX",
+      "confidence": 0.9795,
+      "correct": true
+    },
+    {
+      "id": "Q43",
+      "query": "Deploy Checkout and Auth simultaneously this Thursday \u2014 how many approvals in total and from whom?",
+      "expected": "COMPLEX",
+      "type": "compound + date-conditional",
+      "why": "Two deployments \u00d7 POL-001 rules + date check + TEAM-001 contacts. High complexity.",
+      "decision": "COMPLEX",
+      "confidence": 0.9813,
+      "correct": true
+    },
+    {
+      "id": "Q44",
+      "query": "What is the combined RTO of all services owned by the team leads mentioned in the November 2024 incident report?",
+      "expected": "COMPLEX",
+      "type": "multi-hop + aggregation",
+      "why": "INC-001 \u2192 service \u2192 ARCH-001 (RTO). May expand to multiple services. Chain + math.",
+      "decision": "COMPLEX",
+      "confidence": 0.9794,
+      "correct": true
+    },
+    {
+      "id": "Q45",
+      "query": "If I run a migration tonight and it fails, who do I call first and what is the rollback procedure?",
+      "expected": "COMPLEX",
+      "type": "multi-doc procedural",
+      "why": "POL-002 (rollback requirement) + RUN-* (runbook steps) + TEAM-001 (DBA contact).",
+      "decision": "COMPLEX",
+      "confidence": 0.98,
+      "correct": true
+    },
+    {
+      "id": "Q46",
+      "query": "Which team lead has the most services under their ownership?",
+      "expected": "COMPLEX",
+      "type": "aggregation across docs",
+      "why": "Must scan all ARCH-* docs, count services per lead, find max. Full corpus scan.",
+      "decision": "COMPLEX",
+      "confidence": 0.9046,
+      "correct": true
+    },
+    {
+      "id": "Q47",
+      "query": "What would the total planned downtime window be if we schedule maintenance for every service back-to-back?",
+      "expected": "COMPLEX",
+      "type": "aggregation + arithmetic",
+      "why": "Sum of all RTOs across ARCH-001 through ARCH-004. Multi-doc + math.",
+      "decision": "COMPLEX",
+      "confidence": 0.9814,
+      "correct": true
+    },
+    {
+      "id": "Q48",
+      "query": "Who are the two people I need to get approval from to deploy a critical service on a Friday before the cutoff?",
+      "expected": "COMPLEX",
+      "type": "policy + contact lookup",
+      "why": "POL-001 (critical service needs team lead + VP) \u2192 TEAM-001 for both contacts.",
+      "decision": "COMPLEX",
+      "confidence": 0.9823,
+      "correct": true
+    },
+    {
+      "id": "Q49",
+      "query": "What is the email of the DBA lead and the Commerce team lead, and are they the same person?",
+      "expected": "COMPLEX",
+      "type": "multi-person lookup",
+      "why": "Two separate TEAM-001 lookups for different roles, then comparison.",
+      "decision": "COMPLEX",
+      "confidence": 0.9743,
+      "correct": true
+    },
+    {
+      "id": "Q50",
+      "query": "Which service had a latency incident in November 2024, what is its RTO, and is that RTO above or below average?",
+      "expected": "COMPLEX",
+      "type": "multi-hop + aggregation + comparison",
+      "why": "INC-001 \u2192 ARCH-001 (RTO=15) \u2192 all ARCH-* for average \u2192 comparison. Full chain.",
+      "decision": "COMPLEX",
+      "confidence": 0.979,
+      "correct": true
+    }
+  ]
+}

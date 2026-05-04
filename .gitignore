@@ -40,3 +40,8 @@ desktop.ini
 dist/
 build/
 *.egg-info/
+
+# ── Router: trained model weights ─────────────────────────────────────────────
+# Large binary files (~265MB). Each developer trains their own local copy.
+# training_data.json is committed (it's just text). model/ is not.
+router/model/

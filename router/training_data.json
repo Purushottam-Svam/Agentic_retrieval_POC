@@ -1,0 +1,1126 @@
+[
+  {
+    "query": "What does 'zero trust architecture' imply?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Where is the incident runbook documented?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What was the root cause of the November 2024 incident and which team was responsible?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Where is the policy for virtual machine provisioning documented?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "For next Tuesday\u2019s deployment, which teams require sign-off according to the latest cross-service integration policy?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What cumulative effect has the increase in SMS notifications had on supporting infrastructures this year?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "How does hosting service A in both east and west regional data centers affect compliance, and who ensures alignment?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What does RTO stand for?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What were this year\u2019s key dependencies reshaped due to recent systems integration outcomes?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What is the total downtime exposure across all customer-facing services combined?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Where are the off-boarding procedures documented for team members?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "If I need to deploy three services and run two migrations in one day, walk me through the complete approval chain.",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "When resolving a security incident, which cross-department procedures must be followed, especially regarding sensitive data handling?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Who is the facilitator for architecture review meetings?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Where is the emergency protocol for power outages documented?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Given Wednesday morning\u2019s planned resource reallocation, what oversight ensures continuity within global services?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Which configurations need verification before weekends and, if inconsistencies are found, who handles them?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Who is responsible for updating the service architecture diagrams?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What is the required lead time for making changes to disaster recovery plans per current organization policy?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "If deploying a beta version this Thursday, who should be notified from QA and what is their approval turnaround time?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Where is the source control strategy documented?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Where can I find policies related to remote work?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What would be the total downtime if the three highest-RTO services all failed at once?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What are the on-call hours for engineers?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Where can I find technical specification documents?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Who moderates transformation processes during sprint changes to the operational frameworks?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What is the combined on-call contact chain for a simultaneous failure of Payment Gateway and Checkout?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What is the total number of unresolved incidents relating to service outage from January, and whom should I notify?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Who needs to approve this month's change management documentation updates, and what departments are they part of?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What departments are involved when updating risk assessments for a scheduled major update in the preceding SLA cycle?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "When deploying patches, which team has final signature authority, and does it change if IT operations declare a state of emergency?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Who authored the disaster recovery procedures for service E, and when was it last updated?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What is the RTO for the Payment Gateway?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What does 'configuration drift' mean in an engineering context?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "In urgent system repairs, how does one obtain priority access to restricted resources, per procedural guidelines?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "During a dual-site failure, how does the incremental load affect ongoing transactional integrity?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "How do I coordinate a deployment for the new API service with both the Networking and Security teams for this Friday at 2pm?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Who from both the engineering and marketing teams needs to coordinate for product announcements regarding performance improvements?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Who to consult for customizing server configurations during peak load times, based on tech documentation?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "If the next deployment window is missed, what are the alternatives according to the SLA agreement with our primary cloud provider?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Which incidents in the knowledge base involved database issues and who were the responsible owners?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What is the definition of a P1 incident?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Where is the guide for setting up alerting policies?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What are the on-call protocols if service S fails during a holiday weekend, and who should be contacted from tier 1 and tier 2 support?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "A developer wants to deploy the Checkout service and run a database migration this Friday at 2pm UTC. What approvals are needed?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What approvals are needed for beta testing the new feature on live environments, and who should be contacted in case of failure?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What layer of backup communication systems kick in when the primary alerts for service G are down?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What is the staging environment dry-run requirement?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Which service caused the most recent outage and what was its impact on other services?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Where is the network topology documented?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Which runbooks detail the steps for restoring service W in less than 30 minutes and who authored them?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "If systems need to sync data cross-region, who can provide the most recent guidance on data transfer protocols?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Sum the number of incidents caused by network failures from all services over the past three quarters.",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "When coordinating with distributed teams, what primary document sets the standards for time zone adjustments?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What does the acronym 'MTTR' stand for?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Who caused the most recent incident and what is their manager's contact?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What is the deployment freeze window?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What does the acronym 'P1 Incident' stand for in our KB?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Where is the incident runbook for service outages?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Aggregate total planned downtime across all services scheduled for next month.",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What is the SLA for the email notification service?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Who coordinates cross-team efforts during major outages?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Who is Priya Mehta?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Where can I find the runbook for handling a DDoS attack?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "For critical service synchronization, what gating steps exist during pre-deployment reviews?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What does 'circuit breaker pattern' mean?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What is outlined in the disaster recovery plan for Customer Support?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "During a zero-day vulnerability patch process, what supportive actions are advised across departments?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "During a failover exercise, what synchronization occurs between main servers and offsite backups?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What recent audit findings prompted a review of service endpoint security measures, and who initiated the action?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What is the contact information for the team lead of the service with the shortest RTO?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Where is the checklist for releasing a new software version?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Where can I find documentation on service health monitoring?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Who should I contact if both the Auth service and the Checkout service are down?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What are the prerequisites for accessing test environments?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What steps should Tuesday's rollout follow if unresolved database queries pose a risk to user experience?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What is the permissible downtime for maintenance windows?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What are the deployment cutoff hours on Friday?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "With simultaneous deployments occurring, what is the strategy for minimizing risk as outlined in our architecture documents?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What does 'asynchronous communication' mean in service terms?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Who is the team lead for the Data Analytics group?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Who is the VP of Engineering at TechNova?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What is the Auth service architecture?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What were the root causes across all three TechNova incidents and which teams were involved?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Which team lead should be contacted first if both database and deployment issues occur simultaneously?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What is the maximum allowable downtime in the SLA for Database Services?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Where can I find the runbook for database failover procedures?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Who leads the infrastructure capacity planning meetings?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Who supervises the implementation of security patches?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "To comply with SLAs, what is the maximum downtime allowed per service in Q1, and which services exceeded this?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Who handles the archival of incident response data?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Who verifies the compliance of deployment processes with external regulatory standards, and when is the next review?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What is the deployment approval process?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What is the earliest I can deploy to production on a Friday and who approves it for a critical service?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Aggregate all requests for change management meetings involving tier 1 services in the past half-year.",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What is the TechNova on-call escalation policy?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What monitoring tools does TechNova use?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Who is accountable for data encryption standards?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What approvals does a developer need to deploy a critical service on a Friday afternoon?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Where is the checklist for GDPR compliance tasks?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Who signed off the new incident logging protocol, and how should it be incorporated into existing runbooks?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Who are the primary and secondary contacts in case the data archiving process fails during the scheduled migration?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Which policy documents should be reviewed to align current deployment strategies with the latest service architecture requirements?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Who should I page first if both Auth service and database systems are failing simultaneously?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What is the procedure for reporting a network outage?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "How does the current reroute procedure affect data integrity, and who is responsible for quality checks?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Who manages the incident response team at TechNova Inc.?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Aggregate total number of incidents requiring rollback across all services for the last month.",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "For instant notifications about deployments, who should be added to the distribution list, per communications SOP?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Where is the process for performing a root cause analysis documented?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Will the upcoming firmware update this Friday affect dependent IoT services, and in what capacity must interventions occur?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What version of the deployment policy is current?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "During a multi-region failure, what should be prioritized according to incident response guidelines?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What were the contributing factors to all 2024 incidents, and do any share a root cause?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Who is the lead architect for the AI Services division?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "In adjusting KPIs this quarter, how will service delivery timelines adapt, and which teams oversee it?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Where is the documentation for API rate limiting configuration?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What is the policy for hotfix deployments?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Where is the user guide for the internal ticketing system?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What do 'incident severity levels' mean in our context?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Who must give final deployment go-ahead when automated tests reveal critical integration issues?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Who is tasked with resolving application performance incidents?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Do regulatory reviews require additional outreach efforts for increased connection paths in newer service tiers?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What services depend on the Payment Gateway?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What are the immediate post-deployment monitoring checkpoints, and who is responsible for each, per current structure?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What does 'cloud-native architecture' refer to?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What does 'service mesh' mean in the context of our systems?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What does 'data residency' mean under TechNova compliance?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What is the database migration policy?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What is the total estimated cost from unresolved incidents affecting all premium services since May?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What does 'service degradation' mean in SLA terms?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What is the total cost estimation of incidents closed without final root cause analysis this year, and who tracked them?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "If our primary database service has latency issues, what alternate access methods are documented in the runbooks?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "During a critical systems failure, what specific actions should be taken in the first 15 minutes according to runbook C?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What is defined as a critical incident in our KB?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "If deploying feature X this week, which configurations must be updated first, following both company deployment policies and the security framework?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What is the Analytics Pipeline RTO?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What is the RTO for the Auth service?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "If I want to do a migration this Thursday evening at 6pm UTC, what is the approval chain?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What is the purpose of an 'on-call rotation schedule'?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "When auditing data compliance, what recent shifts in policy affect cloud-hosted services?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "To migrate service Q this Friday at midnight, what additional steps are required if the dependent service R has a current SLA risk?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What are the standard operating hours for the IT Support team?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Who is in charge of network infrastructure upgrades?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What does the term 'service orchestration' mean?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Who is responsible for the service that caused the November 2024 latency incident, and what is their contact email?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "When dual pathways are required for reroutes, which policy dictates the most efficient and secure method?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Who is Marcus Webb?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "For upcoming system consolidation phases, what archival procedures aid in historical insights preservation?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What are the total incidents linked to customer accessibility issues this quarter, and what actions were thusly recommended?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What are the key responsibilities of the Incident Commander?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Where is the documentation regarding authentication protocols?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "For deploying patch Y, who needs to approve from both DevOps and Legal, and what are their email contacts?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What are the cumulative downtime hours for services A, B, and C last quarter, and who was responsible for reporting these?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "To whom should I report the risks identified during code audits, referencing the compliance and security policies?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Who contributes to the security incident response team?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "For current architecture scalability plans, who can confirm compliance with redundancy and failover procedures?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Who oversees change management processes?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Who is responsible for client escalations?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What is included in an 'architecture decision record'?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "In case service Y is deprecated, which services are directly impacted, and what are their inter-dependencies?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What does the 'incident postmortem review' process include?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What approvals are needed to deploy on a Monday versus a Friday for a critical service?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Where are team contact emails documented?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "If scheduled for a Friday deployment, what emergency protocols should be revisited according to last year's audit findings?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What is the rollback procedure for failed deployments?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What are the cumulative effects on downtime and service credits given recent network policy changes?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What does 'incident response timeline' include?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "If network congestion impacts data streaming services, who handles the rate limiting adjustments and communicates with operations?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Where are the guidelines for code review processes?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What is the documentation standard for error logging practices?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Total how many times the rollback procedures were enacted during on-call hours in the past six months.",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Where is the glossary of terms used in our engineering documentation?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What is the scope of the service-level objectives for TechNova APIs?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Can I deploy the Checkout service on a Friday at 3pm UTC, and if so who approves it?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "How have regular incident training impacts been measured relative to the decrease in SLA breaches?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Who is responsible for verifying the deployment of critical patches during the upcoming company-wide security review?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Who should be notified for network performance issues?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What is the RTO for Auth?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Who is the team lead for the Checkout service?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Schedule all required data syncs and notify network teams for deployments coordinated across different regions next Tuesday.",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What is the maximum allowed downtime for critical services?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What does the term 'blue-green deployment' mean?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Where is the visualization strategy for performance metrics documented?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "If a developer wants to push a critical hotfix during the deployment freeze, who must they contact?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Who has to revalidate migration plans when there are changes in upstream services with active SLAs?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What are the roles in a 'war room' during a critical incident?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Where can I find the guide for setting up continuous integration?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Who do I contact for both deployment approval and DBA sign-off, and are those the same person?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Who is accountable for recent failures during deployment windows according to historical incident records?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What does the term 'incident triage' entail?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "When service U encounters a critical bug, what is the escalation matrix, and how does it differ from minor bug protocols?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Who approved the last deployment to the Payment Gateway service?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "If a batch job for customer billing fails, who is listed for immediate contact, and what is the standard remediation time?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Who authorizes emergency patch deployments?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Which team lead owns the service with the highest RTO, and how do I reach them?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "How do our deployment policies address redundant architecture and failover mechanisms for critical services?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Who approves changes to the system architecture?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What is the on-call rotation schedule?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Who oversees compliance with open-source licenses?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "How often are interface checks updated for system integration, and who enforces this requirement?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What is the action plan for dealing with phishing attempts?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What is the email of the DBA lead and when should I contact them during a migration?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Who reviews the action items from incident debriefs?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Which service has the longest recovery time and what is its team lead's email?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Who is the primary contact for the Storage team?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Who is responsible for monitoring the authentication service?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What is the total recovery time if all customer-facing services go down at once?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What is the retention policy for service logs?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What is the SLA review schedule for third-party services?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What is the escalation procedure for unresolved tickets?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Can anyone challenge a missed SLA resolution deadline, and what procedures are in place for submissions?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "If the office move is scheduled for next month, who should confirm the readiness of telecommunication systems?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What is the team lead email format at TechNova?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What is the sum of RTOs for Auth, Payment Gateway, and Checkout services?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "When dual-system upgrades are in place, who heads the coordination of server resource allocation, and what guidelines are followed?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What are all the required approvals if I am a developer with no team lead and need to hotfix production?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What are the outstanding technical reviews required for deploying new service versions, and who can expedite these?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Who owns the service that failed in November 2024 and how many incidents has that service had?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Where can I find the procedures for data integrity checks?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Aggregate the total number of expansions in data center capacity for all project teams in the last fiscal year.",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "How do I escalate a P1 incident?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Who monitors the compliance of data privacy policies?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "If I need to run a database migration and deploy to production on the same day, who do I need approval from?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Where is the design documentation for the User Management service?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Where is the documentation for SSL certificate renewal procedures?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Which incidents this year have necessitated both rollback and escalation to senior management?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "If service B is migrating data, what additional checks should be in place this Friday evening to prevent data loss?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Who manages the documentation for service dependency mapping?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Where is the handbook for troubleshooting authentication issues?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Who last approved changes to the network setups document and how does it affect current deployment cycles?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Calculate the total RTO exposure across all services documented in the architecture docs.",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What is the cold storage policy for old backup data?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Who approves database migrations at TechNova?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What does the term 'SLA breach' mean?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "How do I request DBA review for a migration?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Where are the rules for managing user access privileges?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Where can I find the policy for deploying microservices?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "If our SLA breach for service X was logged in April, which incidents need immediate follow-up?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "How many documents are in the knowledge base?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Who in the IT Operations and Legal departments needs to approve the emergency deployment according to policy?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Compare the RTOs of all customer-facing services and identify the highest risk one.",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What is considered the baseline performance metric for our services?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Where can I find the deployment policy for Kubernetes clusters?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What escalation contact list should be in hand if network rerouting involves multiple third-party providers?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What is the expected recovery time for the Logging service?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Where do I find the incident post-mortem template?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Where is the architecture documentation for the Payments API?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What is the standard SLA for critical services?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What is the checkout service RTO?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Who oversees the DevOps team?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "How does the incident report from April for service Z affect the planned deployment this Friday?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "How many network vulnerabilities discovered this year had at least one documented exploit, and who is accountable?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What is the email of the person who owns the service that had the database connection pool issue?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What are the steps in the incident response runbook?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Who are the individuals in charge of developing feedback loops during any failure of caching mechanisms?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Who is responsible for maintaining business continuity plans?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "If incident protocols need refreshing before this Thursday, who enacts the relevant checklists for tech teams?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Who is the on-call engineer for Cloud Services today?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Who leads the Auth service team?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Who needs to approve deployment to the production environment?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "How did the network outage in April affect production SLAs, and what mitigating steps were recommended consequently?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Who is the backup for the on-call engineer for Software Licensing?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What cumulative impact will the upcoming hardware upgrade have across services, and how does it align with our SLAs?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What does 'horizontal scaling' mean in our architecture?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What is the database migration approval requirement?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "For planned redundancy, whom should we consult if recent changes have increased system complexity?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Who manages third-party vendor SLAs?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What is the definition of a 'Major Incident' in our policies?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Which services have RTOs above 15 minutes, and who leads those teams?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Who is responsible for infrastructure at TechNova?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What is the difference between RTO and RPO?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "If the deployment must be delayed beyond the next window, who are the stakeholders that require immediate notification?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "If Auth service and Payment Gateway both go down, what is the combined recovery time?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "What were all the incidents in 2024 and who owned the affected services?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "If the Analytics Pipeline fails, which team lead handles it and what is their escalation path?",
+    "label": "COMPLEX"
+  },
+  {
+    "query": "Where is the internal directory of team members?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Who handles the incident logs for the Fraud Detection service?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "Where is the reference guide for API documentation standards?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What services does TechNova operate?",
+    "label": "SIMPLE"
+  },
+  {
+    "query": "What are the combined approval requirements for deploying a new service and running a migration simultaneously?",
+    "label": "COMPLEX"
+  }
+]
